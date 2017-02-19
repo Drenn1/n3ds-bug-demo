@@ -17,8 +17,12 @@ int main(int argc, char* argv[])
         swiWaitForVBlank();
         int keys = keysCurrent();
 
-        consoleClear();
-        printf("Keys current: %.8x\n", keys);
+        if (keys & KEY_TOUCH) {
+            touchPosition pos;
+            touchRead(&pos);
+
+            printf("Touched %d,%d\n", pos.px, pos.py);
+        }
     }
 
     return 0;
